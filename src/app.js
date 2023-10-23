@@ -32,6 +32,7 @@ const router = Router();
 app.use("/api/v1", router);
 router.use("/auth", routes.Auth);
 router.use("/blog", routes.Blog);
+router.use("/comment", routes.Comment);
 
 app.listen(process.env.PORT, () => {
   clog(COLORS.YELLOW, "APP SOLVEDEX");

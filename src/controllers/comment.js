@@ -3,33 +3,29 @@ export default function (app, db) {
   const { Blog, User, Comment } = db;
   return {
     create: async function (req) {
+      const { user, blog, comment } = req;
       const { data } = req.body;
-      const { user } = req;
-      const newBlogData = {
+      const newCommentData = {
         userId: user.id,
-        title: data.title,
+        blogId: blog.id,
+        commentId: (comment && comment.id) || null,
         content: data.content,
-        summary: data.summary,
-        isPublic: data.isPublic,
       };
-      await Blog.createBlog(newBlogData);
+      await Comment.createComment(newCommentData);
       return {};
     },
     update: async function (req) {
       const { data } = req.body;
-      const { blog } = req;
-      const newBlogData = {
-        title: data.title,
+      const { comment } = req;
+      const newCommentData = {
         content: data.content,
-        summary: data.summary,
-        isPublic: data.isPublic,
       };
-      await blog.update(newBlogData);
+      await comment.update(newCommentData);
       return {};
     },
     delete: async function (req) {
-      const { blog } = req;
-      await blog.destroy();
+      const { comment } = req;
+      await comment.destroy();
       return {};
     },
     listPublicBlogs: async function (req) {

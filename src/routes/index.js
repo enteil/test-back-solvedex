@@ -1,10 +1,12 @@
 import Auth from "./auth";
 import Blog from "./blog";
+import Comment from "./comment";
 
 function Routes(app, db) {
   this.routes = {
     Auth,
     Blog,
+    Comment,
   };
 
   this.associate = function () {

@@ -11,6 +11,10 @@ export const translations = {
     es: "Usuario no encontrado",
     en: "User not found",
   },
+  "blog.notFound": {
+    es: "Blog no encontrado",
+    en: "Blog not found",
+  },
   "auth.no.token": {
     en: "Authorization token is missing or invalid.",
     es: "El token de autorización falta o es inválido.",
