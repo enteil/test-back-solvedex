@@ -43,7 +43,10 @@ export default (sequelize, DataTypes) => {
       },
     }
   );
-  User.associate = function (models) {};
+  User.associate = function (models) {
+    User.hasMany(models.Blog, { foreignKey: "userId" });
+    User.hasMany(models.Comment, { foreignKey: "userId" });
+  };
 
   User.createUser = async function (data) {
     return await this.create(data);

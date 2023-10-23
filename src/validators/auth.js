@@ -73,10 +73,28 @@ export default function (app, db) {
         .withMessage("data.lastNames.required")
         .isLength({ min: 6 })
         .withMessage("data.lastNames.minimumLength"),
-
       check("data.address").optional(),
-
       validOrAbort,
+      async (req, res, next) => {
+        const { email } = req.body.data;
+        try {
+          const user = await User.findOne({ where: { email } });
+          if (user) {
+            return _response(req, res)(null, {
+              code: "email.already.saved",
+              status: 401,
+            });
+          }
+          next();
+        } catch (error) {
+          console.error(Date.now(), error);
+          return _response(req, res)(null, {
+            err: error,
+            code: "server.error",
+            status: 500,
+          });
+        }
+      },
     ],
   };
 }

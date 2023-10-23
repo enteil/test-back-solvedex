@@ -1,8 +1,10 @@
 import Auth from "./auth";
+import Blog from "./blog";
 
 function Routes(app, db) {
   this.routes = {
     Auth,
+    Blog,
   };
 
   this.associate = function () {

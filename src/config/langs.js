@@ -35,12 +35,36 @@ export const translations = {
     en: "The password is required",
     es: "La contraseña es requierda",
   },
+  "data.id.required": {
+    en: "The id is required",
+    es: "La id es requiero",
+  },
   "data.password.minimumLength": {
     en: "The minimum password length is 6 digits",
-    es: "La longitud mínima de la contraseña es de 6 dígitos",
+    es: "La longitud mínima de la contraseña es de 6 caracteres",
   },
   "data.password.mismatch": {
     en: "The password does not match",
     es: "La contraseña no coincide",
+  },
+  "email.already.saved": {
+    en: "The email is already being used",
+    es: "El correo ya esta siendo usado",
+  },
+  "title.already.saved": {
+    en: "The title is already being used",
+    es: "El titulo ya esta siendo usado",
+  },
+  "data.title.minimumLength": {
+    en: "The minimum length of the title is 3 characters",
+    es: "La longitud minima del titulo es de 3 caracteres",
+  },
+  "data.content.minimumLength": {
+    en: "The minimum length of the summary is 3 characters",
+    es: "La longitud minima del resumen es de 3 caracteres",
+  },
+  "data.summary.minimumLength": {
+    en: "The minimum length of the content is 3 characters",
+    es: "La longitud minima del contenido es de 3 caracteres",
   },
 };

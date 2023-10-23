@@ -1,6 +1,8 @@
 import Sequelize from "sequelize";
 import User from "../models/user.js";
 import Session from "../models/session.js";
+import Blog from "../models/blog.js";
+import Comment from "../models/comment.js";
 
 class Models {
   constructor() {
@@ -8,6 +10,8 @@ class Models {
     this.models = {
       Session,
       User,
+      Blog,
+      Comment,
     };
     this.Sequelize = Sequelize;
     this.Op = Sequelize.Op;

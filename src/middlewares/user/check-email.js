@@ -18,7 +18,7 @@ export default function (app, db) {
       req.user = user;
       next();
     } catch (error) {
-      console.error("AUTH FAILED", Date.now(), error);
+      console.error(Date.now(), error);
       return _response(req, res)(null, {
         err: error,
         code: "server.error",

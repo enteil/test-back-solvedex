@@ -1,7 +1,7 @@
 export default function (app, db) {
   const { User, Session } = db;
   return {
-    checkEmail: async function (req, res) {
+    checkEmail: async function () {
       return {};
     },
     login: async function (req) {
@@ -23,12 +23,18 @@ export default function (app, db) {
         },
       };
     },
-
     register: async function (req) {
       const ipAddress =
         req.headers["x-forwarded-for"] || req.connection.remoteAddress;
       const { data } = req.body;
-      const user = await User.createUser(data);
+      const newUserData = {
+        email: data.email,
+        password: data.password,
+        names: data.names,
+        lastNames: data.lastNames,
+        address: data.address,
+      };
+      const user = await User.createUser(newUserData);
       const newSession = await Session.createSession({
         ip: ipAddress,
         userId: user.id,
@@ -42,14 +48,12 @@ export default function (app, db) {
         },
       };
     },
-
     logout: async function (req) {
       const { session } = req;
       await session.update({ active: 0 });
       return {};
     },
-
-    updatePassword: async function (req, res) {
+    updatePassword: async function (req) {
       const {
         user,
         body: { data },
