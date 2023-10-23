@@ -1,23 +1,26 @@
-export default function (app, db, services) {
+export default function (app, db) {
   const { User, Session } = db;
   return {
+    checkEmail: async function (req, res) {
+      return {};
+    },
     login: async function (req) {
       const ipAddress =
         req.headers["x-forwarded-for"] || req.connection.remoteAddress;
       const { user } = req;
+      console.log("🚀 ~ file: auth.js:8 ~ user:", user);
       const newSession = await Session.createSession({
         ip: ipAddress,
         userId: user.id,
       });
 
-      console.log("🚀 ~ file: auth.js:15 ~ permissons:", permissons);
       return {
         token: newSession.token,
         user: {
           id: user.id,
-          name: user.name,
+          names: user.names,
+          lastNames: user.lastNames,
         },
-        permissons,
       };
     },
 
@@ -26,17 +29,17 @@ export default function (app, db, services) {
         req.headers["x-forwarded-for"] || req.connection.remoteAddress;
       const { data } = req.body;
       const user = await User.createUser(data);
-      const publicData = {
-        id: user.id,
-        name: user.name,
-      };
       const newSession = await Session.createSession({
         ip: ipAddress,
         userId: user.id,
       });
       return {
         token: newSession.token,
-        user: publicData,
+        user: {
+          id: user.id,
+          names: user.names,
+          lastNames: user.lastNames,
+        },
       };
     },
 
@@ -52,23 +55,6 @@ export default function (app, db, services) {
         body: { data },
       } = req;
       await user.update({ password: data.newPassword });
-      return {};
-    },
-
-    updateUser: async function (req, res) {
-      const {
-        user,
-        body: { data },
-      } = req;
-
-      const dataToUpdate = {
-        cellphone: data.cellphone || user.cellphone,
-        gender: data.gender || user.gender,
-        age: data.age || user.age,
-        time: data.time || user.time,
-      };
-
-      await user.update(dataToUpdate);
       return {};
     },
   };

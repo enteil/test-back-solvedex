@@ -3,13 +3,12 @@ import express, { Router } from "express";
 import cors from "cors";
 import Models from "./models";
 import Routes from "./routes";
-import response from "./helpers/response";
 
 dotenv.config();
 
 const app = express();
 const db = new Models();
-const routes = new Routes(express, db, response);
+const routes = new Routes(express, db);
 
 const COLORS = {
   YELLOW: "\x1b[33m",

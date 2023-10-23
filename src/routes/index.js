@@ -1,6 +1,6 @@
 import Auth from "./auth";
 
-function Routes(app, db, services) {
+function Routes(app, db) {
   this.routes = {
     Auth,
   };
@@ -8,7 +8,7 @@ function Routes(app, db, services) {
   this.associate = function () {
     const names = Object.keys(this.routes);
     for (let i = 0; i < names.length; i++) {
-      this[names[i]] = this.routes[names[i]](app, db, services);
+      this[names[i]] = this.routes[names[i]](app, db);
     }
   };
 

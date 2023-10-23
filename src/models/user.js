@@ -18,19 +18,9 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
-      role: {
-        type: DataTypes.ENUM,
-        values: ["Admin", "Teacher", "Student", "Parent"],
-        allowNull: true,
-      },
-      docNumber: { type: DataTypes.STRING(50), unique: true },
       names: { type: DataTypes.STRING(100) },
       lastNames: { type: DataTypes.STRING(100) },
-
-      phone: { type: DataTypes.STRING(15) },
       address: { type: DataTypes.STRING(255) },
-
-      dateOfBirth: { type: DataTypes.DATEONLY },
       roleId: { type: DataTypes.INTEGER },
     },
     {

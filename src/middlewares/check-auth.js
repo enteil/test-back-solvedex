@@ -1,6 +1,6 @@
 import _response from "../helpers/response";
 
-export default function (app, db, services, response) {
+export default function (app, db, response) {
   const { User, Session } = db;
 
   return async function (req, res, next) {
@@ -17,11 +17,11 @@ export default function (app, db, services, response) {
         attributes: ["id", "lastAt", "ip", "createdAt"],
         where: {
           token: splitToken,
+          active: true,
         },
         include: [
           {
             model: User,
-            attributes: ["id", "role", "institutionId"],
             required: true,
           },
         ],
@@ -45,6 +45,7 @@ export default function (app, db, services, response) {
       }
 
       req.user = user;
+      req.session = session;
       await session.update({ lastAt: Date.now() });
       next();
     } catch (err) {

@@ -24,7 +24,7 @@ class Models {
       port: process.env.DB_PORT || 3306,
       host: process.env.DB_HOST || "localhost",
       dialect: process.env.DB_DIALECT || "mysql",
-      timezone: "+00:00",
+      timezone: "-05:00",
       logging: false,
     };
   }
