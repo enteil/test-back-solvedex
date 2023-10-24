@@ -73,14 +73,14 @@ export const translations = {
   },
   "data.title.minimumLength": {
     en: "The minimum length of the title is 3 characters",
-    es: "La longitud minima del titulo es de 3 caracteres",
+    es: "La longitud mínima del titulo es de 3 caracteres",
   },
   "data.content.minimumLength": {
     en: "The minimum length of the summary is 3 characters",
-    es: "La longitud minima del resumen es de 3 caracteres",
+    es: "La longitud mínima del resumen es de 3 caracteres",
   },
   "data.summary.minimumLength": {
     en: "The minimum length of the content is 3 characters",
-    es: "La longitud minima del contenido es de 3 caracteres",
+    es: "La longitud mínima del contenido es de 3 caracteres",
   },
 };
