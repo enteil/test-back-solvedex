@@ -28,78 +28,42 @@ export default function (app, db) {
       await comment.destroy();
       return {};
     },
-    listPublicBlogs: async function (req) {
+    getByBlogId: async function (req) {
+      const { blogId } = req.body.data;
       const queryBuilder = {
-        attributes: [
-          "id",
-          "title",
-          "summary",
-          "publishAt",
-          [
-            db.Sequelize.fn("COUNT", db.Sequelize.col("Comments.id")),
-            "commentCount",
-          ],
-        ],
+        attributes: ["id", "content", "createdAt", "commentId", "userId"],
         include: [
           {
             attributes: ["names", "lastNames"],
             model: User,
             required: true,
           },
-          {
-            model: Comment,
-            attributes: [],
-            duplicating: false,
-            required: false,
-          },
         ],
         where: {
-          isPublic: true,
+          blogId,
         },
-        group: ["Blog.id", "User.id"],
       };
-      const result = [];
-      const blogs = await Blog.findAll(queryBuilder);
-      blogs.forEach((blog) => {
-        result.push({
-          id: blog.id,
-          title: blog.title,
-          summary: blog.summary,
-          comments: blog.dataValues.commentCount,
-          publishAt: blog.publishAt,
-          user: {
-            names: blog.User.names,
-            lastNames: blog.User.lastNames,
-          },
-        });
-      });
+      const allComments = await Comment.findAll(queryBuilder);
+      const buildRecursiveComments = (parentId) => {
+        const commentsForParent = allComments
+          .filter((comment) => comment.commentId === parentId)
+          .map((comment) => {
+            return {
+              id: comment.id,
+              content: comment.content,
+              createdAt: comment.createdAt,
+              user: {
+                names: comment.User.names,
+                lastNames: comment.User.lastNames,
+              },
+              replies: buildRecursiveComments(comment.id),
+            };
+          });
+        return commentsForParent;
+      };
+      const topLevelComments = buildRecursiveComments(null);
       return {
-        blogs: result,
-      };
-    },
-    listMineBlogs: async function (req) {
-      const { user } = req;
-      const queryBuilder = {
-        attributes: ["id", "title", "summary", "isPublic", "publishAt"],
-        where: {
-          userId: user.id,
-        },
-        raw: true,
-      };
-      const result = [];
-      const blogs = await Blog.findAll(queryBuilder);
-      blogs.forEach((blog) => {
-        result.push({
-          id: blog.id,
-          title: blog.title,
-          summary: blog.summary,
-          content: blog.content,
-          isPublic: blog.isPublic,
-          publishAt: blog.publishAt || "",
-        });
-      });
-      return {
-        blogs: result,
+        comments: topLevelComments,
       };
     },
   };

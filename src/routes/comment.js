@@ -10,6 +10,11 @@ const Route = function (app, db) {
   router.post("/create", validate.create, Interceptor(controller.create));
   router.put("/update", validate.update, Interceptor(controller.update));
   router.delete("/delete", validate.delete, Interceptor(controller.delete));
+  router.post(
+    "/getByBlogId",
+    validate.getByBlogId,
+    Interceptor(controller.getByBlogId)
+  );
 
   return router;
 };

@@ -3,13 +3,11 @@ import validOrAbort from "../middlewares/validate";
 import _response from "../helpers/response";
 import checkAuthMD from "../middlewares/check-auth";
 import checkBlogMD from "../middlewares/blog/check-blog";
-import checkCommentMD from "../middlewares/comment/check-comment";
 import checkMyCommentMD from "../middlewares/comment/check-my-comment";
 export default function (app, db) {
   const { Comment } = db;
   const checkAuth = checkAuthMD(app, db);
   const checkBlog = checkBlogMD(app, db);
-  const checkComment = checkCommentMD(app, db);
   const checkMyComment = checkMyCommentMD(app, db);
   return {
     create: [
@@ -52,6 +50,11 @@ export default function (app, db) {
       validOrAbort,
       checkAuth,
       checkMyComment,
+    ],
+    getByBlogId: [
+      check("data.blogId").notEmpty().withMessage("data.blogId.required"),
+      validOrAbort,
+      checkAuth,
     ],
   };
 }
