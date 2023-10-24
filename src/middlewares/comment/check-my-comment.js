@@ -1,13 +1,14 @@
 import _response from "../../helpers/response";
-
 export default function (app, db) {
   const { Comment } = db;
   return async (req, res, next) => {
     const { commentId } = req.body.data;
+    const { user } = req;
     try {
       const comment = await Comment.findOne({
         where: {
           id: commentId,
+          userId: user.id,
         },
       });
       if (!comment) {

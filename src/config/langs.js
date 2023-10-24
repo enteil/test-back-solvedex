@@ -15,6 +15,10 @@ export const translations = {
     es: "Blog no encontrado",
     en: "Blog not found",
   },
+  "comment.notFound": {
+    es: "Comentario no encontrado",
+    en: "Comment not found",
+  },
   "auth.no.token": {
     en: "Authorization token is missing or invalid.",
     es: "El token de autorización falta o es inválido.",
@@ -42,6 +46,14 @@ export const translations = {
   "data.id.required": {
     en: "The id is required",
     es: "La id es requiero",
+  },
+  "data.blogId.required": {
+    en: "The blog id is required",
+    es: "La id del blog es requiero",
+  },
+  "data.commentId.required": {
+    en: "The comment id is required",
+    es: "La id del comentario es requiero",
   },
   "data.password.minimumLength": {
     en: "The minimum password length is 6 digits",

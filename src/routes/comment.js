@@ -8,8 +8,8 @@ const Route = function (app, db) {
   const validate = Validator(app, db);
 
   router.post("/create", validate.create, Interceptor(controller.create));
-  router.post("/update", validate.update, Interceptor(controller.update));
-  router.post("/delete", validate.delete, Interceptor(controller.delete));
+  router.put("/update", validate.update, Interceptor(controller.update));
+  router.delete("/delete", validate.delete, Interceptor(controller.delete));
 
   return router;
 };
