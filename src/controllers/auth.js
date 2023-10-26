@@ -52,13 +52,5 @@ export default function (app, db) {
       await session.update({ active: 0 });
       return {};
     },
-    updatePassword: async function (req) {
-      const {
-        user,
-        body: { data },
-      } = req;
-      await user.update({ password: data.newPassword });
-      return {};
-    },
   };
 }

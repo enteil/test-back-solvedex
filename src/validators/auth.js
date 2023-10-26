@@ -1,13 +1,12 @@
 import { check } from "express-validator";
+import _response from "../helpers/response";
 import validOrAbort from "../middlewares/validate";
 import checkAuthMD from "../middlewares/check-auth";
 import checkEmailMD from "../middlewares/user/check-email";
-import _response from "../helpers/response";
 export default function (app, db) {
   const { User } = db;
   const checkAuth = checkAuthMD(app, db);
   const checkEmail = checkEmailMD(app, db);
-
   return {
     checkEmail: [
       check("data.email")

@@ -1,8 +1,9 @@
 import { check } from "express-validator";
-import validOrAbort from "../middlewares/validate";
 import _response from "../helpers/response";
+import validOrAbort from "../middlewares/validate";
 import checkAuthMD from "../middlewares/check-auth";
 import checkMyCommentMD from "../middlewares/comment/check-my-comment";
+
 export default function (app, db) {
   const { Comment, Blog } = db;
   const checkAuth = checkAuthMD(app, db);

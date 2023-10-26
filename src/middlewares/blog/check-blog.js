@@ -1,5 +1,4 @@
 import _response from "../../helpers/response";
-
 export default function (app, db) {
   const { Blog } = db;
   return async (req, res, next) => {
