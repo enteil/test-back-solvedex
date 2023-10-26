@@ -1,6 +1,5 @@
-import moment from "moment";
 export default function (app, db) {
-  const { Blog, User, Comment } = db;
+  const { User, Comment } = db;
   return {
     create: async function (req) {
       const { user, blog, comment } = req;
@@ -34,7 +33,7 @@ export default function (app, db) {
         attributes: ["id", "content", "createdAt", "commentId", "userId"],
         include: [
           {
-            attributes: ["names", "lastNames"],
+            attributes: ["id", "names", "lastNames"],
             model: User,
             required: true,
           },
@@ -53,10 +52,12 @@ export default function (app, db) {
               content: comment.content,
               createdAt: comment.createdAt,
               user: {
+                id: comment.User.id,
                 names: comment.User.names,
                 lastNames: comment.User.lastNames,
               },
               replies: buildRecursiveComments(comment.id),
+              blogId,
             };
           });
         return commentsForParent;

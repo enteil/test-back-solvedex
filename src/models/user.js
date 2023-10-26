@@ -20,8 +20,6 @@ export default (sequelize, DataTypes) => {
       },
       names: { type: DataTypes.STRING(100) },
       lastNames: { type: DataTypes.STRING(100) },
-      address: { type: DataTypes.STRING(255) },
-      roleId: { type: DataTypes.INTEGER },
     },
     {
       paranoid: true,

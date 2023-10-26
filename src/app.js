@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import express, { Router } from "express";
-import cors from "cors";
 import Models from "./models";
 import Routes from "./routes";
 
@@ -22,7 +21,6 @@ const clog = (color, text) => {
 app.disable("x-powered-by");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
 
 app.post("/", (req, res) => {
   res.send("¡Hola desde Express!");

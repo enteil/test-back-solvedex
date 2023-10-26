@@ -9,7 +9,7 @@ const Route = function (app, db) {
 
   router.post("/create", validate.create, Interceptor(controller.create));
   router.put("/update", validate.update, Interceptor(controller.update));
-  router.delete("/delete", validate.delete, Interceptor(controller.delete));
+  router.post("/delete", validate.delete, Interceptor(controller.delete));
   router.get(
     "/list/public",
     validate.listPublicBlogs,

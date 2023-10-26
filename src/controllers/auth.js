@@ -32,7 +32,6 @@ export default function (app, db) {
         password: data.password,
         names: data.names,
         lastNames: data.lastNames,
-        address: data.address,
       };
       const user = await User.createUser(newUserData);
       const newSession = await Session.createSession({

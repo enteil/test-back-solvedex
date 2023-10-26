@@ -27,10 +27,7 @@ export const translations = {
     en: "User is blocked.",
     es: "El usuario está bloqueado.",
   },
-  "server.error": {
-    en: "Internal server error.",
-    es: "Error interno del servidor.",
-  },
+
   "data.email.required": {
     en: "The email is required",
     es: "El correo electronico es requerido",
@@ -50,6 +47,14 @@ export const translations = {
   "data.blogId.required": {
     en: "The blog id is required",
     es: "La id del blog es requiero",
+  },
+  "data.content.required": {
+    en: "The content is required",
+    es: "El contenido es requiero",
+  },
+  "data.title.required": {
+    en: "The title is required",
+    es: "El titulo es requiero",
   },
   "data.commentId.required": {
     en: "The comment id is required",

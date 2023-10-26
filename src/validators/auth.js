@@ -73,7 +73,6 @@ export default function (app, db) {
         .withMessage("data.lastNames.required")
         .isLength({ min: 6 })
         .withMessage("data.lastNames.minimumLength"),
-      check("data.address").optional(),
       validOrAbort,
       async (req, res, next) => {
         const { email } = req.body.data;

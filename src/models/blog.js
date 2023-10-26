@@ -38,7 +38,7 @@ export default (sequelize, DataTypes) => {
       timestamps: true,
       hooks: {
         beforeCreate: (blog) => {
-          if (blog.isPublic == true) {
+          if (blog.isPublic) {
             blog.publishAt = Date.now();
           }
         },

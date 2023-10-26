@@ -29,7 +29,6 @@ export default function createResponseHandler(req, res, next = null) {
       statusCode,
       message: successMessage,
       data: response,
-      _channel: "web",
     });
   };
 }

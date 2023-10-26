@@ -1,4 +1,3 @@
-import moment from "moment";
 export default function (app, db) {
   const { Blog, User, Comment } = db;
   return {
@@ -38,6 +37,7 @@ export default function (app, db) {
           "id",
           "title",
           "summary",
+          "content",
           "publishAt",
           [
             db.Sequelize.fn("COUNT", db.Sequelize.col("Comments.id")),
@@ -70,6 +70,7 @@ export default function (app, db) {
           title: blog.title,
           summary: blog.summary,
           comments: blog.dataValues.commentCount,
+          content: blog.content,
           publishAt: blog.publishAt,
           user: {
             names: blog.User.names,
@@ -84,11 +85,30 @@ export default function (app, db) {
     listMineBlogs: async function (req) {
       const { user } = req;
       const queryBuilder = {
-        attributes: ["id", "title", "summary", "isPublic", "publishAt"],
+        attributes: [
+          "id",
+          "title",
+          "summary",
+          "content",
+          "isPublic",
+          "publishAt",
+          [
+            db.Sequelize.fn("COUNT", db.Sequelize.col("Comments.id")),
+            "commentCount",
+          ],
+        ],
+        include: [
+          {
+            model: Comment,
+            attributes: [],
+            duplicating: false,
+            required: false,
+          },
+        ],
         where: {
           userId: user.id,
         },
-        raw: true,
+        group: ["Blog.id"],
       };
       const result = [];
       const blogs = await Blog.findAll(queryBuilder);
@@ -97,9 +117,10 @@ export default function (app, db) {
           id: blog.id,
           title: blog.title,
           summary: blog.summary,
-          content: blog.content,
           isPublic: blog.isPublic,
           publishAt: blog.publishAt || "",
+          content: blog.content,
+          comments: blog.dataValues.commentCount,
         });
       });
       return {
