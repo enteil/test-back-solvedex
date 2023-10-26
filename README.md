@@ -1,7 +1,7 @@
 # Backend Technical Test for Solvedex 📝
 
 Development of a backend as part of Solvedex's technical assessment.
-This solution utilizes Node.js and Express.js for the frontend, and Sequelize as the ORM.
+This solution uses Node.js and Express.js for the frontend, Sequelize as the ORM, and MySQL as the database.
 
 ## Backend Specifications 🔧
 
